@@ -51,7 +51,7 @@ git)  cd $local_repo
 ###############################################################################################################
       cd $megam_user_home/$filename
 	echo "sbt clean compile stage dist started====> " >> $PLAY_LOG
-      sbt clean compile stage dist  >> $PLAY_LOG
+      /home/megam/bin/sbt clean compile stage dist  >> $PLAY_LOG
 	echo "sbt clean compile stage dist Ended====> " >> $PLAY_LOG
       mv $megam_user_home/$filename/target/universal/*.zip $megam_user_home/$filename/target/
 #cp /home/megam/megam_gateway/target/universal/*.zip /home/megam/megam_gateway/target/
