@@ -20,7 +20,7 @@ extension="${filename##*.}"
 
 filename=${filename%%.*}
 
-megam_user_home="/home/megam/"
+megam_user_home="/var/lib/megam/gulp/meta/"
 local_repo="/usr/share/"
 
 #clone source from git repo
@@ -39,7 +39,7 @@ git)  cd $local_repo
       [ -f *war ] &&  rm -f *.war
       cd $megam_user_home
       [ -d $filename ] &&  rm -rf $filename
-      git clone $remote_repo >> $PLAY_LOG
+      #git clone $remote_repo >> $PLAY_LOG
 ################################# megam-trusty image in one is built with sbt #################################
      # echo "PATH=$PATH:$megam_user_home/bin" >> /root/.bashrc
      # wget -O $megam_user_home/bin/sbt-launch.jar http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.7/sbt-launch.jar
