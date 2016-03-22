@@ -50,7 +50,6 @@ git)  cd $local_repo
       esac
       mvn clean
       mvn package -Dmaven.test.skip=true
-      done
       ;;
 esac
 
