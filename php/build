@@ -1,7 +1,7 @@
 #!/bin/bash
 #Php builder
 
-#megam_php_builder/build tomcat megam_home=/var/lib/megam/gulp  local_repo=/home/megam/tomcat/webapps remote_repo=https://github.com/megamsys/fengoffice.git
+#megam_php_builder/build tomcat megam_home=/var/lib/megam/gulp build_ci=true  local_repo=/home/megam/tomcat/webapps remote_repo=https://github.com/megamsys/fengoffice.git
 
 
 for i in "$@"
@@ -16,18 +16,29 @@ case $i in
     megam_home=*)
     megam_home="${i#*=}"
     ;;
+    build_ci=*)
+    build_ci="${i#*=}"
+    ;;
 esac
 done
 
 filename=$(basename "$remote_repo")
 extension="${filename##*.}"
 project="${filename%.*}"
-cd $megam_home
-rm -r $project
-git clone $remote_repo
-rm -r $local_repo/*
 
-cp -r ./$project/* $local_repo
+cd $megam_home
+case $build_ci in
+true)
+  rm -r $project
+  git clone $remote_repo
+  rm -r $local_repo/*
+  cp -r ./$project/* $local_repo
+  ;;
+false)
+  cd $filename
+  ;;
+esac
+
 if [ ! -f "./$project/start" ]; then
   sudo a2enmod mpm_prefork
   sed -i '1 s/^/#/' /etc/apache2/mods-enabled/mpm_event.load
