@@ -49,7 +49,7 @@ git)  cd $local_repo
         ;;
       esac
       mvn clean
-      mvn package -Dmaven.test.skip=true
+      mvn install -Dmaven.test.skip=true
       ;;
 esac
 
