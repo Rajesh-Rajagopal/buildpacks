@@ -1,7 +1,7 @@
 #!/bin/bash
 #Java builder WAR
 
-#megam_java_builder/build tomcat project=orion local_repo=/home/megam/tomcat/webaps remote_repo=https://github.com/thomasalrin/orion.git
+#megam_java_builder/build tomcat build_ci=true megam_home=/var/lib/megam/gulp project=orion local_repo=/home/megam/tomcat/webapps remote_repo=https://github.com/thomasalrin/orion.git
 
 
 for i in "$@"
@@ -17,6 +17,13 @@ case $i in
     remote_repo=*)
     remote_repo="${i#*=}"
     ;;
+    megam_home=*)
+    megam_home="${i#*=}"
+    ;;
+    build_ci=*)
+    build_ci="${i#*=}"
+    ;;
+
 esac
 done
 
@@ -26,22 +33,24 @@ filename="${filename%.*}"
 
 case "$extension" in
 
-war)  cd $local_repo
-      rm *.war
-      rm -r $project
-      wget $remote_repo
-      chown -R megam:megam *.war
-      ;;
 git)  cd $local_repo
       rm *.war
-      cd /home/megam/
+      cd $megam_home
+
+      case $build_ci in
+      true)
       rm -r $filename
       git clone $remote_repo
       cd $filename
+
+        ;;
+      false)
+      cd $filename
+        ;;
+      esac
       mvn clean
-      mvn package
-      cp target/*.war $local_repo
-      chown -R megam:megam $local_repo/*.war
+      mvn package -Dmaven.test.skip=true
+      done
       ;;
 esac
 

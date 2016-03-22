@@ -17,7 +17,6 @@ PLAY_LOG="/var/log/megam/play_build.log"
 
 filename=$(basename "$remote_repo")
 extension="${filename##*.}"
-
 filename=${filename%%.*}
 
 megam_user_home="/var/lib/megam/gulp/meta/"
@@ -71,7 +70,3 @@ deb)  wget -O $megam_user_home/play.deb $remote_repo
       ;;
 
 esac
-
-
-
-
