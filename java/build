@@ -44,11 +44,6 @@ git)  cd $local_repo
       cd $filename
       mvn clean
       mvn package -Dmaven.test.skip=true
-      arr=$(find . -path "**/target/*.war")
-      for i in "${arr[@]}" 
-      do
-      cp target/*.war $local_repo
-      chown -R megam:megam $local_repo/*.war
       done
       ;;
 esac
