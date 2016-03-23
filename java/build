@@ -1,8 +1,12 @@
 #!/bin/bash
 #Java builder WAR
 
-#megam_java_builder/build tomcat build_ci=true megam_home=/var/lib/megam/gulp project=orion local_repo=/home/megam/tomcat/webapps remote_repo=https://github.com/thomasalrin/orion.git
+#megam_java_builder/build tomcat build_ci=true  project=orion  remote_repo=https://github.com/thomasalrin/java-spring-petclinic.git
 
+build_ci=true
+local_repo=/home/megam/tomcat/webapps
+megam_home=/var/lib/megam/gulp
+remote_repo=https://github.com/thomasalrin/java-spring-petclinic.git
 
 for i in "$@"
 do
@@ -49,10 +53,9 @@ git)  cd $local_repo
         ;;
       esac
       mvn clean
-      mvn install -Dmaven.test.skip=true
+      mvn install -Dmaven.test.skip=true -U
       ;;
 esac
 
 stop java
 start java
-
