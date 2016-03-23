@@ -4,7 +4,6 @@
 #megam_nodejs_builder/build nodejs project=ghost local_repo=/home/sandbox/ghost remote_repo=https://github.com/thomasalrin/ghost.git
 
 megam_home=/var/lib/megam/gulp
-remote_repo=https://github.com/thomasalrin/ghost.git
 build_ci=true
 
 

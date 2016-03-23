@@ -6,7 +6,6 @@
 build_ci=true
 local_repo=/home/megam/tomcat/webapps
 megam_home=/var/lib/megam/gulp
-remote_repo=https://github.com/thomasalrin/java-spring-petclinic.git
 
 for i in "$@"
 do
