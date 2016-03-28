@@ -1,11 +1,11 @@
 #!/bin/bash
 #Php builder
 
-#megam_php_builder/build tomcat megam_home=/var/lib/megam/gulp build_ci=true  local_repo=/home/megam/tomcat/webapps remote_repo=https://github.com/megamsys/fengoffice.git
+#megam_php_builder/build tomcat megam_home=/var/lib/megam/gulp build_ci=true  local_repo=/var/www/html/current remote_repo=https://github.com/megamsys/fengoffice.git
 
 megam_home=/var/lib/megam/gulp
 build_ci=true
-local_repo=/home/megam/tomcat/webapps
+local_repo=/var/www/html/current
 
 
 for i in "$@"
@@ -47,6 +47,7 @@ if [ ! -f "./$project/start" ]; then
   sudo a2enmod mpm_prefork
   sed -i '1 s/^/#/' /etc/apache2/mods-enabled/mpm_event.load
 else
+  chmod 755 ./$project/start
   ./$project/start
 fi
 service apache2 restart

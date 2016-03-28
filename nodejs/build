@@ -6,19 +6,20 @@
 megam_home=/var/lib/megam/gulp
 build_ci=true
 
-
 for i in "$@"
 do
 case $i in
-    project=*)
-    project="${i#*=}"
-
-    ;;
     local_repo=*)
     local_repo="${i#*=}"
     ;;
     remote_repo=*)
     remote_repo="${i#*=}"
+    ;;
+    megam_home=*)
+    megam_home="${i#*=}"
+    ;;
+    build_ci=*)
+    build_ci="${i#*=}"
     ;;
 esac
 done
@@ -27,18 +28,18 @@ filename=$(basename "$remote_repo")
 extension="${filename##*.}"
 project="${filename%.*}"
 
-stop nodejs
-cd $megam_home
+
 case $build_ci in
 true)
+    stop nodejs
+    cd $megam_home
     rm -r $project
     git clone $remote_repo
-    cd $filename
-    ;;
-false)
-    cd $filename
-    ;;
-esac
+    cd $project
     npm install
     #npm install forever-monitor
-start nodejs
+    chmod 755 ./start
+    ./start
+    start nodejs
+    ;;
+esac
