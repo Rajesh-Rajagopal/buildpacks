@@ -54,5 +54,3 @@ git)  cd $megam_home
       ;;
 esac
 
-stop java
-start java
