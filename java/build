@@ -43,16 +43,17 @@ git)  cd $megam_home
       rm -r $filename
       git clone $remote_repo
       cd $filename
-
+      mvn clean
+      mvn install -Dmaven.test.skip=true -U
+      stop java
+      start java 
         ;;
       false)
       cd $filename
-        ;;
-      esac
       mvn clean
       mvn install -Dmaven.test.skip=true -U
+        ;;
+      esac
       ;;
 esac
 
-stop java
-start java
