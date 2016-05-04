@@ -36,9 +36,7 @@ filename="${filename%.*}"
 
 case "$extension" in
 
-git)  cd $local_repo
-      rm *.war
-      cd $megam_home
+git)  cd $megam_home
 
       case $build_ci in
       true)
